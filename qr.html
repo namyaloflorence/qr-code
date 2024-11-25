@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qr code generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #bea3e9;
+        
+        }
+        .qr-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(8, 8, 8, 0.1);
+        }
+        input[type="text or url"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<div class="login conatiner">
+    <h2>
+        Student verification tool
+    </h2>
+    <div class="qr-container"></div>
+
+        <input type="text" id="qr-input" placeholder="enter student's credatials">
+        <button onclick="generateQR()">Generate QR Code</button>
+        <div id="qr-code"></div>
+    </div>
+
+    <script>
+        function generateQR() {
+            const qrInput = document.getElementById('qr-input');
+            const qrCodeDiv = document.getElementById('qr-code');
+
+            if (qrInput.value.trim() === '') {
+                alert('Please enter some text or url !');
+                return;
+            }
+
+            const qrcode = new QRCode(document.getElementById('qr-code'), {
+                text: qrInput.value,
+                width: 256,
+                height: 256,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            qrInput.value = '';
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</body>
+</html>
